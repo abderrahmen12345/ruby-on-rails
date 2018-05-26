@@ -1,0 +1,35 @@
+#app/views/documents/index.html.erb
+h1>My Blog</h1>
+<hr />
+<% @documents.each do |document| %>
+  <h1><%= link_to documents.title, document %></h1>
+
+  <p>
+    <%= markdown(document.body) %>
+  </p>
+  <h5>Published <%= time_ago_in_words document.published_at %> ago</h5>
+
+  <% if document != @documents.last %>
+  <hr />
+  <% end %>
+<% end %>
+  <div class="col-sm-10 col-sm-offset-1 col-xs-12 blog-content">
+    <% @documents.each do |document| %>
+    <div class="col-xs-12">
+      <div class="text-center">
+        <h2><%= document.title %></h2>
+        <h6><%= document.created_at.strftime('%b %d, %Y') %></h6>
+      </div>
+
+      <div>
+        <%= raw(document.body).truncate(358) %>
+      </div>
+
+      <div class="text-center">
+        <%= link_to "READ MORE", post_path(document) %>
+      </div>
+      <br>
+    </div>
+    <% end %>
+  </div>
+</div>
